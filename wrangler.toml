@@ -1,0 +1,14 @@
+name = "oculus-counter"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oculus-counter"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+# Comma-separated list of allowed counter ids. Unlisted ids get 403.
+# Set your own value here or as a Worker secret/var at deploy time.
+ALLOWED_IDS = ""
