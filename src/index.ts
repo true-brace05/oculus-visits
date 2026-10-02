@@ -53,6 +53,9 @@ export default {
       }
       return handleCount(request, env);
     }
+    if (url.pathname === "/health") {
+      return new Response("ok", { status: 200 });
+    }
     return new Response("not found", { status: 404 });
   },
 };
