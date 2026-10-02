@@ -36,8 +36,6 @@ const TEMPLATES: Record<string, string> = {
   oculus: OCULUS_TEMPLATE,
 };
 
-export const DEFAULT_CHARACTER_NAME = "";
-
 export function getCharacterTemplate(
   name: string | null | undefined,
 ): string | null {
