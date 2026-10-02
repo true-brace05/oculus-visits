@@ -1,0 +1,9 @@
+{
+  "name": "minimal",
+  "background": "#ffffff",
+  "foreground": "#111111",
+  "accent": "#888888",
+  "font": "monospace",
+  "label": "visits",
+  "width": 180
+}
