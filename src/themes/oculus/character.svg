@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="{{LABEL}}: {{COUNT}}">
   <defs>
     <radialGradient id="oculus-iris" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#c4b5fd"/>
-      <stop offset="55%" stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#4c1d95"/>
+      <stop offset="0%" stop-color="{{IRIS_HI}}"/>
+      <stop offset="55%" stop-color="{{IRIS_MID}}"/>
+      <stop offset="100%" stop-color="{{IRIS_LO}}"/>
     </radialGradient>
     <clipPath id="oculus-eyeclip">
       <ellipse cx="100" cy="56" rx="60" ry="32"/>
@@ -11,12 +11,14 @@
   </defs>
   <rect width="200" height="150" rx="10" fill="#120826"/>
   <rect x="1" y="1" width="198" height="148" rx="9" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+  {{GLOW}}
   <circle cx="100" cy="56" r="45" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="18 10 6 10" opacity="0.85">
     <animateTransform attributeName="transform" type="rotate" from="0 100 56" to="360 100 56" dur="24s" repeatCount="indefinite"/>
   </circle>
   <circle cx="100" cy="56" r="51" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 6" opacity="0.5">
     <animateTransform attributeName="transform" type="rotate" from="360 100 56" to="0 100 56" dur="40s" repeatCount="indefinite"/>
   </circle>
+  {{EXTRA_RING}}
   <ellipse cx="100" cy="56" rx="60" ry="32" fill="#0b0518" stroke="#8b5cf6" stroke-width="1.5" opacity="0.9"/>
   <g clip-path="url(#oculus-eyeclip)">
     <g stroke="#a78bfa" stroke-width="1" opacity="0.12">
