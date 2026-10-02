@@ -5,7 +5,34 @@ import { escapeXml, padCount } from "./render.ts";
 // Each template uses {{COUNT}} (zero-padded) and {{LABEL}} placeholders.
 // Unknown character names fall back to the default badge renderer.
 
-const TEMPLATES: Record<string, string> = {};
+// Embedded copy of src/themes/oculus/character.svg.
+// Workers have no filesystem access at runtime, so the template is bundled
+// here. Keep the two in sync when editing the artwork.
+const OCULUS_TEMPLATE = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150" role="img" aria-label="{{LABEL}}: {{COUNT}}">` +
+  `<defs><radialGradient id="oculus-iris" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="55%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#4c1d95"/></radialGradient>` +
+  `<clipPath id="oculus-eyeclip"><ellipse cx="100" cy="56" rx="60" ry="32"/></clipPath></defs>` +
+  `<rect width="200" height="150" rx="10" fill="#120826"/>` +
+  `<rect x="1" y="1" width="198" height="148" rx="9" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>` +
+  `<circle cx="100" cy="56" r="45" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="18 10 6 10" opacity="0.85">` +
+  `<animateTransform attributeName="transform" type="rotate" from="0 100 56" to="360 100 56" dur="24s" repeatCount="indefinite"/></circle>` +
+  `<circle cx="100" cy="56" r="51" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 6" opacity="0.5">` +
+  `<animateTransform attributeName="transform" type="rotate" from="360 100 56" to="0 100 56" dur="40s" repeatCount="indefinite"/></circle>` +
+  `<ellipse cx="100" cy="56" rx="60" ry="32" fill="#0b0518" stroke="#8b5cf6" stroke-width="1.5" opacity="0.9"/>` +
+  `<g clip-path="url(#oculus-eyeclip)">` +
+  `<g stroke="#a78bfa" stroke-width="1" opacity="0.12">` +
+  `<line x1="40" y1="38" x2="160" y2="38"/><line x1="40" y1="47" x2="160" y2="47"/><line x1="40" y1="56" x2="160" y2="56"/><line x1="40" y1="65" x2="160" y2="65"/><line x1="40" y1="74" x2="160" y2="74"/></g>` +
+  `<circle cx="100" cy="56" r="23" fill="url(#oculus-iris)"/>` +
+  `<ellipse cx="100" cy="56" rx="8" ry="11" fill="#0b0518"><animate attributeName="cx" values="93;107;93" dur="7s" repeatCount="indefinite"/></ellipse>` +
+  `<circle cx="103" cy="52" r="2.5" fill="#e9e4ff" opacity="0.9"><animate attributeName="cx" values="96;110;96" dur="7s" repeatCount="indefinite"/></circle>` +
+  `<rect x="40" y="24" width="120" height="0" fill="#120826"><animate attributeName="height" values="0;0;64;0;0" keyTimes="0;0.92;0.95;0.98;1" dur="5s" repeatCount="indefinite"/></rect>` +
+  `</g>` +
+  `<text x="100" y="114" text-anchor="middle" font-family="monospace" font-size="9" fill="#a78bfa" opacity="0.8">{{LABEL}}</text>` +
+  `<text x="100" y="136" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" letter-spacing="3" fill="#e9e4ff">{{COUNT}}</text>` +
+  `</svg>`;
+
+const TEMPLATES: Record<string, string> = {
+  oculus: OCULUS_TEMPLATE,
+};
 
 export const DEFAULT_CHARACTER_NAME = "";
 
