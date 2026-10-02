@@ -1,8 +1,10 @@
 import minimal from "./themes/minimal.json" with { type: "json" };
+import hud from "./themes/hud.json" with { type: "json" };
 import type { RenderTheme } from "./render.ts";
 
 const THEMES: Record<string, RenderTheme> = {
   minimal: minimal as RenderTheme,
+  hud: hud as RenderTheme,
 };
 
 export const DEFAULT_THEME_NAME = "minimal";

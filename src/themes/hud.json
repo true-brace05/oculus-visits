@@ -1,0 +1,9 @@
+{
+  "name": "hud",
+  "background": "#120826",
+  "foreground": "#e9e4ff",
+  "accent": "#8b5cf6",
+  "font": "monospace",
+  "label": "visits",
+  "width": 180
+}
