@@ -26,3 +26,31 @@ export class D1Storage implements Storage {
     return row?.count ?? 0;
   }
 }
+
+export async function recordDaily(
+  db: D1Database,
+  id: string,
+): Promise<void> {
+  await db
+    .prepare(
+      `INSERT INTO daily (id, date, count)
+       VALUES (?1, date('now'), 1)
+       ON CONFLICT(id, date) DO UPDATE SET count = daily.count + 1`,
+    )
+    .bind(id)
+    .run();
+}
+
+export async function getLast7Days(
+  db: D1Database,
+  id: string,
+): Promise<number> {
+  const row = await db
+    .prepare(
+      `SELECT COALESCE(SUM(count), 0) AS total FROM daily
+       WHERE id = ?1 AND date >= date('now', '-6 days')`,
+    )
+    .bind(id)
+    .first<{ total: number }>();
+  return row?.total ?? 0;
+}

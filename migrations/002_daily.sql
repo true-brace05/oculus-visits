@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS daily (
+  id TEXT NOT NULL,
+  date TEXT NOT NULL,
+  count INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (id, date)
+);
